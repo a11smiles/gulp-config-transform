@@ -1,7 +1,7 @@
 {
   "name": "gulp-config-transform",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "A gulp plugin to apply `web.config` transforms.",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -26,9 +26,11 @@
   },
   "homepage": "https://github.com/a11smiles/gulp-config-transform",
   "dependencies": {
+    "gulp": "^3.8.6",
     "gulp-shell": "^0.5.1",
     "gulp-util": "^3.0.7",
     "lodash": "^3.9.3",
-    "file-exists": "1.0.0"
+    "file-exists": "1.0.0",
+    "gulp-file": "0.2.0"
   }
 }

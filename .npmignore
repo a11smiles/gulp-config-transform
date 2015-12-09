@@ -1,8 +1,4 @@
-.DS_Store
-
-npm-debug.log
+.idea/
 node_modules/
-*.sublime*
-
 NuGet.config
 example/

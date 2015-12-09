@@ -1,22 +1,24 @@
 'use strict';
 
 var _ = require('lodash'),
+    gulp = require('gulp'),
     shell = require('gulp-shell'),
     gutil = require('gulp-util'),
-    fileExists = require('file-exists');
+    fileExists = require('file-exists'),
+    file = require('gulp-file');
 
 var PLUGIN_NAME = 'config-transform';
 
 function transform(options) {
 
     options = _.extend({
-        config: './Web.config',
-        transform: 'Web.Debug.Config',
+        config: './web.config',
+        transform: 'web.Debug.Config',
         destination: './wwwroot/web.config',
         msBuildPath: 'C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\msbuild.exe'
     }, options);
 
-    var _project = '<Project ToolsVersion="4.0" DefaultTargets="Demo" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll"/><Target Name="Transform"><TransformXml Source="{source}" Transform="{transform}" Destination="{destination}"/></Target></Project>';
+    var _project = '<Project ToolsVersion="4.0" DefaultTargets="Demo" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath)\\Microsoft\\VisualStudio\\v10.0\\Web\\Microsoft.Web.Publishing.Tasks.dll"/><Target Name="Transform"><TransformXml Source="{source}" Transform="{transform}" Destination="{destination}"/></Target></Project>';
 
     if (!fileExists(options.config))
         throw new gutil.PluginError(PLUGIN_NAME, '"' + options.config + '" does not exist.');
@@ -24,11 +26,13 @@ function transform(options) {
     if (!fileExists(options.transform))
         throw new gutil.PluginError(PLUGIN_NAME, '"' + options.transform + '" does not exist.');
 
-    _project.replace('{source}', options.config);
-    _project.replace('{transform}', options.transform);
-    _project.replace('{destination}', options.destination);
+    _project = _project.replace('{source}', options.config)
+                       .replace('{transform}', options.transform)
+                       .replace('{destination}', options.destination);
 
-    return shell.task()
+    file('_msbuild.proj', _project, { src : true }).pipe(gulp.dest('.'));
+
+    return gulp.task('transform', shell.task(options.msBuildPath + ' ./_msbuild.proj /t:Transform'));
 }
 
 module.exports = transform;
