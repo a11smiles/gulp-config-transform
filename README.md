@@ -22,7 +22,7 @@ var config-transform = require('gulp-config-transform');
 gulp.task('transform', function() {
     var options = { transform : 'Web.Debug.config' }
 	
-	config-transform(options);	
+    config-transform(options);	
 });
 
 ```
