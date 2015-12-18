@@ -1,6 +1,6 @@
 {
   "name": "gulp-config-transform",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A gulp plugin to apply `web.config` transforms.",
   "main": "index.js",
   "repository": {
