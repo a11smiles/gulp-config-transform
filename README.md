@@ -47,6 +47,5 @@ gulp.task('transform', function() {
 ## To Do's
 * Add option to specify .NET version of MSBuild in the case there's preference for a different target framework.
 * Add option to specify platform in the case this is being built in an x86 environment.
-* Add errors.
-* Add automatic build and deployment to NPM.
+* Add error handling.
  

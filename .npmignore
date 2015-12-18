@@ -1,4 +1,4 @@
-.idea/
 node_modules/
 NuGet.config
 example/
+appveyor.yml

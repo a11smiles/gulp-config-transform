@@ -1,0 +1,25 @@
+nuget:
+  account_feed: true
+  
+init:
+  - git config --global core.autocrlf true
+  
+install:
+  - cmd: npm install
+ 
+version: 0.2.{build}
+skip_tags: true
+
+build_script:
+  - ps: (Get-Content "package.json") -replace '"0\.0\.0-\*"', ('"' + $env:APPVEYOR_BUILD_VERSION + '"') | Set-Content "package.json" 
+  - cmd: npm publish
+  
+deploy:
+ - provider: GitHub
+   auth_token:
+     secure: SYb32DuCMENA1CBbJimmnGZafiLsFMN4QAH6B3R6x2rnWHftwUvrD9eE1J+V8C4B
+   draft: false
+   prerelease: false
+   on:
+     branch: master
+  
