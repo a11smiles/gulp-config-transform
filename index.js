@@ -17,11 +17,11 @@ function transform(options) {
         destination: './wwwroot/web.config',
         netVersion: '4',
         framework: 'x64',
-        msBuildPath: '',
-        assemblyFile: ''
+        msBuildPath: undefined,
+        assemblyFile: undefined
     }, options);
 
-    if (!!options.msBuildPath) {
+    if (!options.msBuildPath) {
         if (options.netVersion !== '4' || (options.netVersion !== '2'))
             throw new gutil.PluginError(PLUGIN_NAME, 'Option "netVersion" is required and must be "2" or "4".');
 
@@ -46,7 +46,7 @@ function transform(options) {
     if (!fileExists(options.msBuildPath))
         throw new gutil.PluginError(PLUGIN_NAME, '"' + options.msBuildPath + '" does not exist.');
         
-    if (!!options.assemblyFile) {
+    if (!options.assemblyFile) {
         if (fileExists('C:\\Program Files (x86)\\MSBuild\\Microsoft\\VisualStudio\\v10.0\\Web\\Microsoft.Web.Publishing.Tasks.dll'))
             options.assemblyFile = 'C:\\Program Files (x86)\\MSBuild\\Microsoft\\VisualStudio\\v10.0\\Web\\Microsoft.Web.Publishing.Tasks.dll';
         else if (fileExists('C:\\Program Files (x86)\\MSBuild\\Microsoft\\VisualStudio\\v12.0\\Web\\Microsoft.Web.Publishing.Tasks.dll'))
