@@ -43,12 +43,23 @@ gulp.task('transform', function() {
   The output path of the transformed `web.config`.  
   _Default_: `./wwwroot/web.config`  
   
-* `msBuildPath`  
-  The full path to the MSBuild executable in order to perform the transform.  
-  _Default_: `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe`
+* `netVersion`  
+  The version of MSBuild. Accepted values are '4' or '2'.  
+  _Default_: `4`    
   
-## To Do's
-* Add option to specify .NET version of MSBuild in the case there's preference for a different target framework.
-* Add option to specify platform in the case this is being built in an x86 environment.
-* Add error handling.
+* `framework`  
+  The target framework for the build.  Accepted values are 'x86' or 'x64'.  
+  _Default_: `x64`  
+  
+* `msBuildPath`  
+  The full path to the MSBuild executable in order to perform the transform.  The path is determined based on the `netVersion` and `framework` options.  However, if an alternative path is specified, that path will be used instead.  
+  _Default_: _resolved based on `netVersion` and `framework`_
  
+* `assemblyFile`  
+  The path of the assembly file for MSBuild to use in order to conduct the web transformation targets.  The path is attempted to be resolved automatically by the plugin.  But, if it cannot be found or you would like the specify and alternative path, you will need to specify the path as an option.  
+  The default to this path depends on the current .NET SDK (which is also included with Visual Studio) that is installed on your machine, but the path is _typically_ something like: 
+  ```
+  C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll
+  ```  
+  The `v10.0` can range from `v10.0-v15.0`.     
+  _Default_: _resolved automatically_  
