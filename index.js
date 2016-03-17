@@ -22,19 +22,19 @@ function transform(options) {
     }, options);
 
     if (!options.msBuildPath) {
-        if (options.netVersion !== '4' || (options.netVersion !== '2'))
+        if (options.netVersion != '4' && options.netVersion != '2')
             throw new gutil.PluginError(PLUGIN_NAME, 'Option "netVersion" is required and must be "2" or "4".');
 
-        if (options.framework !== 'x64' || (options.netVersion !== 'x86'))
+        if (options.framework != 'x64' && options.netVersion != 'x86')
             throw new gutil.PluginError(PLUGIN_NAME, 'Option "framework" is required and must be "x86" or "x64".');
             
-        if (options.netVersion == '4') {
+        if (options.netVersion == 4) {
             if (options.framework == 'x64') {
                 options.msBuildPath = 'C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\msbuild.exe'
             } else if (options.framework == 'x86') {
                 options.msBuildPath = 'C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\msbuild.exe'
             }
-        } else if (options.netVersion == '2') {
+        } else if (options.netVersion == 2) {
             if (options.framework == 'x64') {
                 options.msBuildPath = 'C:\\Windows\\Microsoft.NET\\Framework64\\v2.0.50727\\msbuild.exe'
             } else if (options.framework == 'x86') {
