@@ -12,7 +12,7 @@ With ASP.NET 5 applications, the `web.config` has been deprecated and _should_ o
 
 Additionally, ASP.NET is no longer compiled by MSBuild, but, rather, the new .NET Execution environment (DNX).  With this change, MSBuild targets files (.csproj, .vbproj) are no longer needed.
 
-Unfortunately, while migrating legacy applications to ASP.NET 5, the `web.config` and its transformations may still be necessary.  But, without targets files, utilities like SlowCheetah and Fast Koala become obsolete.  Visual Studio 2015 relies on Gulp tasks to handle and pre- and post- build steps.  By using _gulp-config-transform_, you can perform the necessary config transformations for both, debug and production, environments.
+Unfortunately, while migrating legacy applications to ASP.NET 5, the `web.config` and its transformations may still be necessary.  But, without targets files, utilities like SlowCheetah and Fast Koala become obsolete.  Visual Studio 2015 relies on Gulp tasks to handle any pre- and post- build steps.  By using _gulp-config-transform_, you can perform the necessary config transformations for both, debug and production, environments.
 
 ## Installation
 Install the package with NPM and add it to your development dependencies.  
