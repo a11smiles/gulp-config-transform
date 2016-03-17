@@ -17,8 +17,8 @@ function transform(options) {
         destination: './wwwroot/web.config',
         netVersion: '4',
         framework: 'x64',
-        msBuildPath: undefined,
-        assemblyFile: undefined
+        msBuildPath: '',
+        assemblyFile: ''
     }, options);
 
     if (!!options.msBuildPath) {
