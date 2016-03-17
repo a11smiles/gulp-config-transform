@@ -44,7 +44,7 @@ function transform(options) {
     }
     
     if (!fileExists(options.msBuildPath))
-        throw new gutil.PluginError(PLUGIN_NAME, '"' + options.msBuildPath + '" does not exist.');
+        throw new gutil.PluginError(PLUGIN_NAME, 'MSBuild at path: "' + options.msBuildPath + '" does not exist.');
         
     if (!options.assemblyFile) {
         if (fileExists('C:\\Program Files (x86)\\MSBuild\\Microsoft\\VisualStudio\\v10.0\\Web\\Microsoft.Web.Publishing.Tasks.dll'))
@@ -66,13 +66,13 @@ function transform(options) {
         else
             throw new gutil.PluginError(PLUGIN_NAME, 'Cannot find "assemblyFile" does not exist.  Please specify the path of the "Microsoft.Web.Publishing.Tasks.dll" file.');
     } else if (!fileExists(options.assemblyFile))
-        throw new gutil.PluginError(PLUGIN_NAME, '"' + options.assemblyFile + '" does not exist.');
+        throw new gutil.PluginError(PLUGIN_NAME, 'AssemblyFile at path: "' + options.assemblyFile + '" does not exist.');
     
     if (!fileExists(options.config))
-        throw new gutil.PluginError(PLUGIN_NAME, '"' + options.config + '" does not exist.');
+        throw new gutil.PluginError(PLUGIN_NAME, 'Web.config at path: "' + options.config + '" does not exist.');
 
     if (!fileExists(options.transform))
-        throw new gutil.PluginError(PLUGIN_NAME, '"' + options.transform + '" does not exist.');
+        throw new gutil.PluginError(PLUGIN_NAME, 'Transform file at path: "' + options.transform + '" does not exist.');
 
     var _project = '<Project ToolsVersion="4.0" DefaultTargets="Demo" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><UsingTask TaskName="TransformXml" AssemblyFile="{assemblyFile}"/><Target Name="Transform"><TransformXml Source="{source}" Transform="{transform}" Destination="{destination}"/></Target></Project>';
 
