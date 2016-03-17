@@ -56,7 +56,7 @@ gulp.task('transform', function() {
   _Default_: _resolved based on `netVersion` and `framework`_
  
 * `assemblyFile`  
-  The path of the assembly file for MSBuild to use in order to conduct the web transformation targets.  The path is attempted to be resolved automatically by the plugin.  But, if it cannot be found or you would like the specify and alternative path, you will need to specify the path as an option.  
+  The path of the assembly file for MSBuild to use in order to conduct the web transformation targets.  The path is attempted to be resolved automatically by the plugin.  But, if it cannot be found or you would like to specify an alternative path, you will need to specify the path as an option.  
   The default to this path depends on the current .NET SDK (which is also included with Visual Studio) that is installed on your machine, but the path is _typically_ something like: 
   ```
   C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll
