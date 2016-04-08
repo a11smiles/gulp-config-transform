@@ -31,6 +31,7 @@
     "gulp-util": "^3.0.7",
     "lodash": "^3.9.3",
     "file-exists": "1.0.0",
-    "gulp-file": "0.2.0"
+    "gulp-file": "0.2.0",
+    "es6-promise": "*"
   }
 }
