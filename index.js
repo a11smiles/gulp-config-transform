@@ -87,7 +87,7 @@ function createProj(options) {
 
 function transform(options) {
 
-    options = _.extend({
+    var _options = _.extend({
         config: './web.config',
         transform: 'web.Debug.Config',
         destination: './wwwroot/web.config',
@@ -98,10 +98,10 @@ function transform(options) {
     }, options);
 
 
-    setup(options);
+    setup(_options);
 
-    return createProj(options).then(function() {
-        return gulp.task('transform', shell.task(options.msBuildPath + ' ./_msbuild.proj /t:Transform'));
+    return createProj(_options).then(function() {
+        return gulp.task('transform', shell.task(_options.msBuildPath + ' ./_msbuild.proj /t:Transform'));
     });
 }
 
