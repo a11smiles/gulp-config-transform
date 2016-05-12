@@ -2,12 +2,13 @@
 
 var _ = require('lodash'),
     gulp = require('gulp'),
-    shell = require('gulp-shell'),
     gutil = require('gulp-util'),
     fileExists = require('file-exists'),
-    file = require('gulp-file');
+    file = require('gulp-file'),
+    Q = require('Q');
 
-require('es6-promise').polyfill();
+var spawn = require('child_process').spawn;
+
 
 var PLUGIN_NAME = 'config-transform';
 
@@ -67,6 +68,7 @@ function setup(options) {
 }
 
 function createProj(options) {
+    var deferred = Q.defer();
 
     var _project = '<Project ToolsVersion="4.0" DefaultTargets="Demo" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><UsingTask TaskName="TransformXml" AssemblyFile="{assemblyFile}"/><Target Name="Transform"><TransformXml Source="{source}" Transform="{transform}" Destination="{destination}"/></Target></Project>';
 
@@ -76,13 +78,13 @@ function createProj(options) {
                        .replace('{transform}', options.transform)
                        .replace('{destination}', options.destination);
 
-    return Promise.all([
-        new Promise(function(resolve, reject) {
-            file('_msbuild.proj', _project, { src: true })
-                .pipe(gulp.dest('.'))
-                .on('end', resolve)
-        })
-    ]);
+    file('_msbuild.proj', _project, { src: true })
+        .pipe(gulp.dest('.'))
+        .on('end', function() {
+            deferred.resolve();
+        });
+        
+    return deferred.promise;
 }
 
 function transform(options) {
@@ -100,9 +102,9 @@ function transform(options) {
 
     setup(_options);
 
-    return createProj(_options).then(function() {
-        return gulp.task('transform', shell.task(_options.msBuildPath + ' ./_msbuild.proj /t:Transform'));
-    });
+    createProj(_options).then(function() {
+        spawn(_options.msBuildPath, ['./_msbuild.proj', '/t:Transform'], {stdio: 'inherit'});
+    }).done();
 }
 
 module.exports = transform;
