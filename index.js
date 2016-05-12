@@ -102,7 +102,7 @@ function transform(options) {
 
     setup(_options);
 
-    createProj(_options).then(function() {
+    return createProj(_options).then(function() {
         spawn(_options.msBuildPath, ['./_msbuild.proj', '/t:Transform'], {stdio: 'inherit'});
     }).done();
 }
