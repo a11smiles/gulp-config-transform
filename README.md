@@ -64,6 +64,6 @@ gulp.task('transform', function() {
   The `v10.0` can range from `v10.0-v15.0`.     
   _Default_: _resolved automatically_  
   
-  ## Known Issues / Workarounds
-  If a transformed configuration file is not created and no error is thrown try running the gulp command as an Administrator.
+## Known Issues / Workarounds
+If a transformed configuration file is not created and no error is thrown try running the gulp command as an Administrator.
   
