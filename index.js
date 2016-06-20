@@ -87,7 +87,7 @@ function createProj(options) {
     return deferred.promise;
 }
 
-function transform(options) {
+function transform(options,cb) {
 
     var _options = _.extend({
         config: './web.config',
@@ -103,7 +103,9 @@ function transform(options) {
     setup(_options);
 
     return createProj(_options).then(function() {
-        spawn(_options.msBuildPath, ['./_msbuild.proj', '/t:Transform'], {stdio: 'inherit'});
+        var msBuildSpawn = spawn(_options.msBuildPath, ['./_msbuild.proj', '/t:Transform'], {stdio: 'inherit'});
+		if(cb)
+			msBuildSpawn.on("exit",cb)
     }).done();
 }
 
